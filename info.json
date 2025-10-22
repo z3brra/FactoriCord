@@ -1,0 +1,10 @@
+{
+    "name": "FactoriCord",
+    "version": "0.0.1",
+    "title": "FactoriCord - The ultimate Discord brige & Server logger",
+    "author": "Zebrra",
+    "factorio_version": "2.0",
+    "dependencies":  ["base >= 2.0.0"],
+    "description": "FactoriCord connects your Factorio server with Discord. It bridges in-game chat messages, logs player activity, and provides a data layer for future API integrations. Ideal for comunities that want real-time interaction and server insights directly from Discord or web panel.",
+    "homepage": "coming soon"
+}
