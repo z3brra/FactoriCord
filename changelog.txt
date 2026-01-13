@@ -1,0 +1,22 @@
+---------------------------------------------------------------------------------------------------
+Version: 1.1.0
+Date: 13. 01. 2026
+  Major Features:
+    - Added custom victory event: `on_factoricord_victory` (unified victory detection across game modes).
+
+  Features:
+    - Added logging for:
+      - `on_rocket_launched`
+      - `on_research_finished`
+    - Added per-event configuration via mod settings (enable/disable tracked events).
+
+  Changes:
+    - Refactored internal structure:
+      - `controller.lua` now delegates to dedicated event handlers/services.
+
+  Locale:
+    - Added EN and FR locales for the new mod settings.
+
+  Compatibility:
+    - Supports Factorio 2.0.x.
+    - Compatible with Freeplay, Scenarios, and Campaigns without requiring special configuration.
