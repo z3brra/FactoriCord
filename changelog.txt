@@ -1,4 +1,14 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.1.1
+Date: 13. 01. 2026
+  Bugfixes:
+    - Fixed multiplayer incompatibility caused by missing event handle re-registration on load.
+    - Resolved the "script-envet-mismatch" error when joining a server.
+    - Clients can now join servers without event handler desynchronization errors.
+
+  Changes:
+    - Storage initialization is now strictly limited to `on_init` and `on_configuration_changed` to guarantee save/load stability.
+---------------------------------------------------------------------------------------------------
 Version: 1.1.0
 Date: 13. 01. 2026
   Major Features:

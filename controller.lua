@@ -23,6 +23,10 @@ function Controller.on_init()
 end
 
 function Controller.on_load()
+--     Controller.init_global()
+end
+
+function Controller.on_configuration_changed(cfg)
     Controller.init_global()
 end
 

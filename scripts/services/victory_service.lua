@@ -3,9 +3,9 @@ local VictoryService = {}
 
 function VictoryService.init_global()
   storage._fc_victory_done = storage._fc_victory_done or false
-  storage._fc_victory_source = storage._fc_victory_source or nil
-  storage._fc_victory_detected_by = storage._fc_victory_detected_by or nil
-  storage._fc_victory_first_seen_tick = storage._fc_victory_first_seen_tick or nil
+  storage._fc_victory_source = storage._fc_victory_source
+  storage._fc_victory_detected_by = storage._fc_victory_detected_by
+  storage._fc_victory_first_seen_tick = storage._fc_victory_first_seen_tick
   storage._fc_last_finished = storage._fc_last_finished or false
 end
 

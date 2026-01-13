@@ -1,11 +1,21 @@
 local Controller = require("controller")
 local Utils = require("scripts.utils")
 
+local SPECIAL = {
+    on_init = true,
+    on_load = true,
+    on_configuration_changed = true
+}
+
+local ALWAYS_ON = {
+    on_player_created = true
+}
+
 local function discover_event_handlers()
     local handlers = {}
 
     for key, callable in pairs(Controller) do
-        if type(callable) == "function" and key:sub(1, 3) == "on_" then
+        if type(callable) == "function" and key:sub(1, 3) == "on_" and not SPECIAL[key] then
             local defines_event_name = defines.events[key]
 
             if defines_event_name then
@@ -27,13 +37,23 @@ local dynamic_handlers = discover_event_handlers()
 
 local function register_events()
     for _, handler in pairs(dynamic_handlers) do
-        if Utils.is_event_enabled(handler.name) then
+        local enabled = ALWAYS_ON[handler.name] or Utils.is_event_enabled(handler.name)
+
+        if enabled then
             script.on_event(handler.event_id, handler.callable)
             log("[FactoriCord] Enabled event : " .. handler.name)
         else
             script.on_event(handler.event_id, nil)
             log("[FactoriCord] Disabled event : " .. handler.name)
         end
+
+        -- if Utils.is_event_enabled(handler.name) then
+        --     script.on_event(handler.event_id, handler.callable)
+        --     log("[FactoriCord] Enabled event : " .. handler.name)
+        -- else
+        --     script.on_event(handler.event_id, nil)
+        --     log("[FactoriCord] Disabled event : " .. handler.name)
+        -- end
     end
 end
 
@@ -51,8 +71,17 @@ script.on_load(function()
     register_events()
 end)
 
+script.on_configuration_changed(function(cfg)
+    if Controller.on_configuration_changed then
+        Controller.on_configuration_changed(cfg)
+    elseif Controller.init_global then
+        Controller.init_global()
+    end
+    register_events()
+end)
+
 script.on_event(defines.events.on_runtime_mod_setting_changed, function(e)
-    if e.setting:sub(1, 8) == "jsonlog_" then
+    if e.setting and e.setting:sub(1, 8) == "jsonlog_" then
         register_events()
     end
 end)
